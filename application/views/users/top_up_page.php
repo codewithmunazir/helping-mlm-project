@@ -1,0 +1,142 @@
+<?php include('uheader.php');?>
+<style>
+    .addressimg{
+        width: auto;
+        object-fit: contain;
+        height: 200px;
+        border: 6px solid black;
+        border-radius: 30px;
+    }
+    .addressimg1{
+        width: 100%;
+        height: 300px;
+        object-fit: contain;
+        border-radius: 30px;
+    }
+    .blahimage{
+        margin-bottom: 18px; 
+        height: 120px;
+    }
+    @media  only screen and (min-width:0px) and (max-width: 767px){
+        .addressimg1{
+            width: 100%;
+            object-fit: contain;
+            border-radius: 30px;
+        }
+        .blahimage{
+            margin-bottom: 18px;
+            height: 100px;
+        }
+    }
+</style>
+
+            <div class="content-wrapper">
+                 <!-- Content Header (Page header) -->
+                  <div class="content-header">
+                    <div class="container-fluid">
+                      <div class="row mb-2">
+                        <div class="col-sm-6">
+                          <h1 class="m-0 text-dark"><?php echo $tag;?></h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                          <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
+                            <li class="breadcrumb-item active">Send Request</li>
+                          </ol>
+                        </div><!-- /.col -->
+                      </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                  </div>
+
+                   <!-- Main content -->
+                    <section class="content">
+                      <div class="container-fluid" style="margin-top: -35px;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card mt-5">
+                                        <div class="card-header">
+                                                    <?php if($msg=$this->session->flashdata('msg_invalid')) {
+                                $msg_class=$this->session->flashdata('msg_class');?>
+                              <div class="input-group mb-3 alert <?php echo $msg_class;?>">
+                                   <?= $msg; ?>
+                              </div>
+                            <?php } if($smsg=$this->session->flashdata('msg_success')) {
+                              $smsg_class=$this->session->flashdata('msg_class');?>
+                              <div class="input-group mb-3 alert <?php echo $smsg_class;?>">
+                                   <?= $smsg; ?>
+                              </div>
+                          <?php } ?>           </div>
+                                        <div class="card-body">
+                                            <form role="form"  id="mypassform" action="<?php echo base_url();?>top-up" method="POST" >
+                                        	
+                                        	 <h4 class="text-red mt-5">My Activation Amount 
+                                                                                  <!-- <input class="form-control" type="text"  placeholder="My BOT ID" name="sponsed_id"  id="sponsed_id" onchange="return getsponserdId();"> -->
+                                    <span class="text-primary">$ <?php  echo getfunds($userDetai->user_id);?></span></h4>
+                                        	    <div class="col-md-12 mb-3">
+                                                    <label for="sponsed_id"><strong>BOT ID</strong></label> <span id="alertmsg" class="ml-2"></span></label>
+                                                                                                  <input class="form-control" type="text"  placeholder="My BOT ID" name="sponsed_id"  id="sponsed_id"  required> 
+                                             <?php   echo form_error('sponsed_id'); ?>
+                                                </div>
+                                                
+                                                 <div class="col-md-12 mb-3">
+                                                    <label for="new_typassword">Select Pack</label>
+                                                     
+                                                     
+                                            <select class="default-select form-control wide mb-3" required>
+                                               <option value="">Select Pack </option>
+                                            <?php foreach($getpack as $pack){ ?>
+                                             
+        <option value="<?php echo $pack['id'];?>"> $<?php echo $pack['start_amt']." To   $".$pack['end_amount']."  Get ".$pack['roi_percent']." %
+Daily ";?></option>
+        <?php }?>
+                     
+
+                    </select>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="amout">Pack Amount</label>
+                                                    <?php echo form_error('roipackselect'); ?>
+                                                    <input type="number" name="roipackselect" class="form-control" id="amout" placeholder="Enter amount" required>
+
+                                                </div>
+                                                 <div class="col-md-12 mb-3">
+                                                    <label for="tnxpass">Transaction Password </label>
+                                                     <?php echo form_error('tnxpass'); ?>
+                                                    <div class="input-group">
+                                             <?php echo form_input(['class'=>'form-control','type'=>'password','id'=>'topnewPassword', 'name'=>'tnxpass','placeholder'=>'Enter transaction Password']);?>
+                                                <span class="input-group-text" onclick="togglePassword('topnewPassword', this)"  style="cursor: pointer;">
+                                                    <i class="bi bi-eye"></i>
+                                                </span>
+                                               
+                                            </div>
+                                                </div>
+                                               
+                                                
+                                                <br>
+                                                <center>
+                                                    <button class="btn btn-primary text-center" id="submit" type="submit">Invest</button>
+                                                </center>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            </div>
+                    </section>
+                
+            </div>
+        <!-- main content area end -->
+    
+<!-- Main Footer -->
+  <!-- <footer class="main-footer">
+    <strong>Copyright &copy; 2020-2021 <a href="">GoldenChance</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.1.0
+    </div>
+  </footer> -->
+
+  </div>
+<!-- ./wrapper -->
+<?php include('ufooter.php');?>

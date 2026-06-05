@@ -1,0 +1,6 @@
+# Set max execution time to 1800 seconds (1 hour)
+php_value max_execution_time 600
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php/$1 [PT,L]
